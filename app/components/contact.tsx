@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,6 +13,7 @@ import {
 import { Send, Mail, MessageSquare } from "lucide-react";
 import { toast } from "sonner";
 import { z } from "zod";
+import emailjs from "@emailjs/browser";
 
 const contactSchema = z.object({
 	name: z.string().trim().min(1, "Name is required").max(100, "Name too long"),
@@ -75,9 +76,10 @@ const Contact = () => {
 	});
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [errors, setErrors] = useState<Record<string, string>>({});
+	const formRef = useRef<HTMLFormElement>(null);
 
 	const handleChange = (
-		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
 	) => {
 		const { name, value } = e.target;
 		setFormData((prev) => ({ ...prev, [name]: value }));
@@ -108,11 +110,30 @@ const Contact = () => {
 
 		setIsSubmitting(true);
 
-		await new Promise((resolve) => setTimeout(resolve, 1500));
+		try {
+			if (formRef.current) {
+				const response = await emailjs.sendForm(
+					"service_1bpa2yf",
+					"template_uqmopxk",
+					formRef.current,
+					"XmCvWE5a8-e2SOh0Z",
+				);
 
-		toast.success("Message sent successfully! We'll get back to you soon.");
-		setFormData({ name: "", email: "", subject: "", message: "" });
-		setIsSubmitting(false);
+				console.log("EmailJS response:", response);
+
+				if (response.status === 200) {
+					toast.success(
+						"Message sent successfully! We'll get back to you soon.",
+					);
+					setFormData({ name: "", email: "", subject: "", message: "" });
+				}
+			}
+		} catch (error) {
+			console.error("Error sending email:", error);
+			toast.error("Failed to send message. Please try again.");
+		} finally {
+			setIsSubmitting(false);
+		}
 	};
 
 	return (
@@ -160,7 +181,7 @@ const Contact = () => {
 								</h3>
 							</div>
 
-							<form onSubmit={handleSubmit} className="space-y-6">
+							<form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
 								<div>
 									<Input
 										name="name"

@@ -1,6 +1,13 @@
 "use client";
 import { motion } from "framer-motion";
-import { Github, Twitter, Linkedin, Mail } from "lucide-react";
+import {
+	Github,
+	Twitter,
+	Linkedin,
+	Mail,
+	Instagram,
+	Facebook,
+} from "lucide-react";
 
 const Footer = () => {
 	const currentYear = new Date().getFullYear();
@@ -55,10 +62,16 @@ const Footer = () => {
 						<h4 className="font-display font-semibold mb-6">Connect</h4>
 						<div className="flex gap-4">
 							{[
-								{ icon: Twitter, href: "#" },
-								{ icon: Linkedin, href: "#" },
+								{
+									icon: Facebook,
+									href: "https://www.facebook.com/share/1833avWpQm/",
+								},
 								{ icon: Github, href: "#" },
 								{ icon: Mail, href: "#contact" },
+								{
+									icon: Instagram,
+									href: "https://www.instagram.com/tsar_labs?igsh=ZDM3aW5uenpmbzNq",
+								},
 							].map((social, index) => (
 								<motion.a
 									key={index}
