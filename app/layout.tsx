@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
 	title: "TSAR",
 	description: "TSAR",
+	icons: {
+		icon: "@/public/assets/logo.png",
+	},
 };
 
 export default function RootLayout({

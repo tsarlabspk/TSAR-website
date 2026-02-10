@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import logo from "@/public/assets/logo.png";
+import Image from "next/image";
 
 const navLinks = [
 	{ name: "Home", href: "#home" },
@@ -37,12 +39,8 @@ const Navbar = () => {
 			<div className="container-main">
 				<div className="flex items-center justify-between h-20 px-6">
 					{/* Logo */}
-					<a href="#" className="flex items-center gap-3">
-						<div className="w-10 h-10 rounded-xl bg-linear-to-br from-primary to-glow-secondary flex items-center justify-center">
-							<span className="font-display font-bold text-primary-foreground text-lg">
-								T
-							</span>
-						</div>
+					<a href="#" className="flex items-center justify-center gap-2">
+						<Image src={logo} alt="TSAR Logo" width={60} height={60} />
 						<span className="font-display font-bold text-xl tracking-tight">
 							TSAR
 						</span>

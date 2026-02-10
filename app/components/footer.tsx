@@ -8,6 +8,8 @@ import {
 	Instagram,
 	Facebook,
 } from "lucide-react";
+import Image from "next/image";
+import logo from "@/public/assets/logo.png";
 
 const Footer = () => {
 	const currentYear = new Date().getFullYear();
@@ -18,12 +20,8 @@ const Footer = () => {
 				<div className="grid md:grid-cols-4 gap-12">
 					{/* Brand */}
 					<div className="md:col-span-2">
-						<a href="#" className="flex items-center gap-3 mb-6">
-							<div className="w-12 h-12 rounded-xl bg-linear-to-br from-primary to-glow-secondary flex items-center justify-center">
-								<span className="font-display font-bold text-primary-foreground text-xl">
-									T
-								</span>
-							</div>
+						<a href="#" className="flex items-center gap-1 mb-6">
+							<Image src={logo} alt="TSAR Logo" width={60} height={60} />
 							<div>
 								<span className="font-display font-bold text-2xl tracking-tight block">
 									TSAR
@@ -66,8 +64,7 @@ const Footer = () => {
 									icon: Facebook,
 									href: "https://www.facebook.com/share/1833avWpQm/",
 								},
-								{ icon: Github, href: "#" },
-								{ icon: Mail, href: "#contact" },
+
 								{
 									icon: Instagram,
 									href: "https://www.instagram.com/tsar_labs?igsh=ZDM3aW5uenpmbzNq",
