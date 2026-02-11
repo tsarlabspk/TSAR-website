@@ -20,8 +20,14 @@ const contactSchema = z.object({
 	email: z
 		.string()
 		.trim()
-		.email("Invalid email address")
-		.max(255, "Email too long"),
+		.min(1, "Email or phone is required")
+		.max(255, "Email or phone too long")
+		.refine((value) => {
+			const emailCheck = z.string().email().safeParse(value);
+			const digitsOnly = value.replace(/\D/g, "");
+			const phoneCheck = digitsOnly.length >= 7 && digitsOnly.length <= 15;
+			return emailCheck.success || phoneCheck;
+		}, "Enter a valid email or phone number"),
 	subject: z
 		.string()
 		.trim()
@@ -200,8 +206,8 @@ const Contact = () => {
 								<div>
 									<Input
 										name="email"
-										type="email"
-										placeholder="Your Email"
+										type="text"
+										placeholder="Email or Phone"
 										value={formData.email}
 										onChange={handleChange}
 										className="input-styled h-12"

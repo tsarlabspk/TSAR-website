@@ -5,14 +5,14 @@ import glassesFront from "@/public/assets/glasses-front.jpg";
 import Image from "next/image";
 
 const specifications = [
-	{ label: "Sensor", value: "mmWave HLK-LD2410B" },
-	{ label: "Processor", value: "ESP32 / Arduino Nano 33 BLE" },
-	{ label: "Detection Range", value: "Up to 5 meters" },
-	{ label: "Battery", value: "Li-Po 500-800mAh" },
-	{ label: "Weight", value: "60-80 grams" },
-	{ label: "Charging", value: "USB-C (TP4056)" },
-	{ label: "Connectivity", value: "Bluetooth Low Energy" },
-	{ label: "Material", value: "3D Printed PLA/ABS/Resin" },
+	{ label: "Sensor", value: "Sharp GP2Y0A02YK0F IR distance sensor" },
+	{ label: "Processor", value: "ESP32 (12-bit ADC, 3.3V)" },
+	{ label: "Sampling", value: "10 Hz (100 ms) with 5-sample median" },
+	{ label: "Filtering", value: "EMA smoothing (alpha 0.30)" },
+	{ label: "Distance Model", value: "Power-law fit, 5V nominal scaled to Vcc" },
+	{ label: "Valid Voltage", value: "0.4-2.5 V window (scaled to Vcc)" },
+	{ label: "Alert Thresholds", value: "Beep on <=80 cm, off >=90 cm" },
+	{ label: "Buzzer Pattern", value: "40 ms on; 80-450 ms interval by distance" },
 ];
 
 const Specs = () => {
