@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -81,8 +81,34 @@ const Contact = () => {
 		message: "",
 	});
 	const [isSubmitting, setIsSubmitting] = useState(false);
+	const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">(
+		"idle",
+	);
 	const [errors, setErrors] = useState<Record<string, string>>({});
 	const formRef = useRef<HTMLFormElement>(null);
+	const dismissTimerRef = useRef<number | null>(null);
+
+	useEffect(() => {
+		if (submitStatus === "idle") {
+			return;
+		}
+
+		if (dismissTimerRef.current !== null) {
+			window.clearTimeout(dismissTimerRef.current);
+		}
+
+		dismissTimerRef.current = window.setTimeout(() => {
+			setSubmitStatus("idle");
+			dismissTimerRef.current = null;
+		}, 2000);
+
+		return () => {
+			if (dismissTimerRef.current !== null) {
+				window.clearTimeout(dismissTimerRef.current);
+				dismissTimerRef.current = null;
+			}
+		};
+	}, [submitStatus]);
 
 	const handleChange = (
 		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -91,6 +117,9 @@ const Contact = () => {
 		setFormData((prev) => ({ ...prev, [name]: value }));
 		if (errors[name]) {
 			setErrors((prev) => ({ ...prev, [name]: "" }));
+		}
+		if (submitStatus !== "idle") {
+			setSubmitStatus("idle");
 		}
 	};
 
@@ -115,6 +144,7 @@ const Contact = () => {
 		}
 
 		setIsSubmitting(true);
+		setSubmitStatus("idle");
 
 		try {
 			if (formRef.current) {
@@ -132,11 +162,13 @@ const Contact = () => {
 						"Message sent successfully! We'll get back to you soon.",
 					);
 					setFormData({ name: "", email: "", subject: "", message: "" });
+					setSubmitStatus("success");
 				}
 			}
 		} catch (error) {
 			console.error("Error sending email:", error);
 			toast.error("Failed to send message. Please try again.");
+			setSubmitStatus("error");
 		} finally {
 			setIsSubmitting(false);
 		}
@@ -265,6 +297,16 @@ const Contact = () => {
 										</>
 									)}
 								</Button>
+								{submitStatus === "success" && (
+									<p className="text-sm text-emerald-500 text-center">
+										Message sent. We'll get back to you soon.
+									</p>
+								)}
+								{submitStatus === "error" && (
+									<p className="text-sm text-destructive text-center">
+										Couldn&apos;t send your message. Please try again.
+									</p>
+								)}
 							</form>
 						</div>
 					</motion.div>
