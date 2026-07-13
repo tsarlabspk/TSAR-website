@@ -13,8 +13,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-	title: "TSAR",
-	description: "TSAR",
+	title: "TSAR Labs | Smart Glasses for the Visually Impaired",
+    description: "TSAR Labs makes smart assistive glasses for blind and visually impaired individuals. Real-time obstacle detection using mmWave radar. Founded by Fawaz Ahsan.",
+    verification: {
+        google: "pbAgwmaBarqk-4qMabMhcx_joMDS3hR4Awvtu6FCsmI",
+    },
 	icons: {
 		icon: [
 			{ url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
