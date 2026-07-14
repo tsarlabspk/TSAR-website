@@ -47,9 +47,9 @@ const Hero = () => {
 						transition={{ duration: 0.8, delay: 0.4 }}
 						className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-10 leading-relaxed"
 					>
-						TSAR smart glasses combine cutting-edge mmWave radar technology with
-						elegant design to provide real-time obstacle detection for the
-						visually impaired.
+						TSAR Smart Glasses combine intelligent sensing
+with elegant design to deliver real-time obstacle detection
+and intuitive navigation assistance for the visually impaired.
 					</motion.p>
 
 					{/* Product Image */}
