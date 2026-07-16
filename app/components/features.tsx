@@ -1,15 +1,14 @@
 "use client";
 import { motion } from "framer-motion";
-import { Radar, Vibrate, Zap, Wifi, Shield, Battery } from "lucide-react";
+import { Radar, Vibrate, Zap, Shield, Battery } from "lucide-react";
 import glassesSide from "@/public/assets/glasses-side.jpg";
 import Image from "next/image";
 
 const features = [
 	{
 		icon: Radar,
-		title: "mmWave Radar Technology",
-		description:
-			"Advanced HLK-LD2410B sensor provides precise presence and distance detection up to 5 meters.",
+		title: "Infrared Proximity Sensing",
+description: "Sharp GP2Y0A02YK0F IR sensor detects obstacles up to 2 meters ahead with reliable real-time distance measurement.",
 	},
 	{
 		icon: Vibrate,
@@ -22,12 +21,6 @@ const features = [
 		title: "Zero Setup Required",
 		description:
 			"No apps, no complicated setup. Just wear and go with instant, intuitive navigation.",
-	},
-	{
-		icon: Wifi,
-		title: "BLE Connectivity",
-		description:
-			"ESP32 microcontroller with Bluetooth Low Energy for seamless device integration.",
 	},
 	{
 		icon: Shield,
